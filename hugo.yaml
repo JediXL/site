@@ -1,0 +1,65 @@
+baseURL: https://jedixl.github.io/blog/
+locale: zh-cn
+defaultContentLanguage: zh
+title: JediXL
+theme:
+  - PaperMod
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+
+pagination:
+  pagerSize: 10
+
+caches:
+  images:
+    dir: ":cacheDir/images"
+
+minify:
+  disableXML: true
+
+params:
+  env: production
+  description: 个人博客
+  author: JediXL
+  defaultTheme: auto
+  socialIcons:
+    - name: github
+      url: https://github.com/JediXL
+  mainSections:
+    - posts
+  DateFormat: "2006年1月2日"
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+
+  homeInfoParams:
+    Title: 你好
+    Content: 这里记录我正在学习和思考的事情。
+
+menu:
+  main:
+    - name: 文章
+      url: /posts/
+      weight: 10
+    - name: 归档
+      url: /archives/
+      weight: 20
+    - name: 搜索
+      url: /search/
+      weight: 30
+    - name: 关于
+      url: /about/
+      weight: 40
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
