@@ -33,9 +33,6 @@ params:
   label:
     icon: logo.png
     iconHeight: 32
-  socialIcons:
-    - name: github
-      url: https://github.com/JediXL
   mainSections:
     - posts
   DateFormat: "2006年1月2日"
