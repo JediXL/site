@@ -1,18 +1,15 @@
 ---
-title: 你好，世界
+title: 每一次重新搭建Blog，都好像是要重新做人
 date: 2026-11-02T09:00:00+08:00
 draft: false
 tags:
   - 随笔
-summary: 这是博客的第一篇文章。
+summary: 踏入荒原
 ---
 
-欢迎来到我的博客。
+欢迎来到浓雾荒原
 
-以后写文章时，在项目目录执行：
+今天是2026. 11. 02
 
-```bash
-hugo new content posts/文章标题.md
-```
+我又一次的搭建了博客，感觉好像是要重新做人
 
-Hugo 会在 `content/posts/` 下生成草稿。写完后把文首的 `draft: true` 改成 `draft: false`，保存并推送到 GitHub，站点就会自动更新。
