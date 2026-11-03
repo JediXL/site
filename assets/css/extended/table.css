@@ -1,0 +1,8 @@
+.post-content table {
+  word-break: normal;
+}
+
+.post-content table th,
+.post-content table td {
+  vertical-align: top;
+}
