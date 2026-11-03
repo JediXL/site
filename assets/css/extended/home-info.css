@@ -3,6 +3,11 @@
   margin: 0 0 var(--gap);
 }
 
+.home-info .entry-header h1 {
+  font-size: 22px;
+  line-height: 1.4;
+}
+
 .home-info .entry-content p {
   margin-block: 0.4em;
 }
