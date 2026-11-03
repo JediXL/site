@@ -63,6 +63,9 @@ menu:
     - name: 关于
       url: /about/
       weight: 40
+    - name: RSS订阅
+      url: /index.xml
+      weight: 50
 
 outputs:
   home:
