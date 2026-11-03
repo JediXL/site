@@ -34,9 +34,14 @@ POSTS = [
         VAULT / "🌊  流水残心.md",
         ROOT / "content/posts/流水残心.md",
     ),
+    (
+        VAULT / "☄️  余烬/一天能有多少个 21 分钟.md",
+        ROOT / "content/posts/一天能有多少个21分钟.md",
+    ),
 ]
 
 WIKILINK = re.compile(r"\[\[([^\[\]|#]+?)(#[^\[\]|]+)?(?:\|([^\[\]]+))?\]\]")
+PROPERTY = re.compile(r"^- [^:\n]+:.*$")
 SOURCE_URL = re.compile(r'(?m)^source:\s*"?(https?://[^"\s]+)"?\s*$')
 DATE_LINE = re.compile(r"(?m)^date:.*$")
 SKIP_DIRS = {".obsidian", ".git", ".trash", "node_modules"}
@@ -60,11 +65,28 @@ def source_url(path: Path) -> str | None:
     return match.group(1) if match else None
 
 
+def strip_property_block(body: str) -> str:
+    lines = body.splitlines()
+    index = 0
+    while index < len(lines) and lines[index].strip() == "":
+        index += 1
+    start = index
+    while index < len(lines) and PROPERTY.match(lines[index]):
+        index += 1
+    if index == start:
+        return body
+    while index < len(lines) and lines[index].strip() == "":
+        index += 1
+    if index < len(lines) and lines[index].strip() == "---":
+        return "\n".join(lines[index + 1 :]).strip()
+    return body
+
+
 def convert_body(text: str, notes: dict[str, Path]) -> str:
     lines = text.splitlines()
     if lines and lines[0].startswith("# "):
         lines = lines[1:]
-    body = "\n".join(lines).strip()
+    body = strip_property_block("\n".join(lines).strip())
 
     def replace(match: re.Match[str]) -> str:
         name = match.group(1).strip()
