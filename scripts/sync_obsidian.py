@@ -34,10 +34,6 @@ POSTS = [
         VAULT / "🌊  流水残心.md",
         ROOT / "content/posts/流水残心.md",
     ),
-    (
-        VAULT / "☄️  余烬/一天能有多少个 21 分钟.md",
-        ROOT / "content/posts/一天能有多少个21分钟.md",
-    ),
 ]
 
 WIKILINK = re.compile(r"\[\[([^\[\]|#]+?)(#[^\[\]|]+)?(?:\|([^\[\]]+))?\]\]")
