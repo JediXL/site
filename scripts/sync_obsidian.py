@@ -26,6 +26,10 @@ POSTS = [
         VAULT / "❤️‍🔥 好东西.md",
         ROOT / "content/posts/好东西.md",
     ),
+    (
+        VAULT / "🪨 它山之石.md",
+        ROOT / "content/posts/它山之石.md",
+    ),
 ]
 
 WIKILINK = re.compile(r"\[\[([^\[\]|#]+?)(#[^\[\]|]+)?(?:\|([^\[\]]+))?\]\]")
