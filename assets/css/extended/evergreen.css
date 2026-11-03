@@ -1,0 +1,34 @@
+.evergreen-nav {
+  position: fixed;
+  z-index: 2;
+  top: calc(var(--header-height) + 2.5rem);
+  left: calc(50% - 34rem);
+  width: 9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.evergreen-nav a {
+  color: var(--secondary);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.evergreen-nav a.active {
+  color: var(--primary);
+  font-weight: 650;
+}
+
+@media screen and (max-width: 1180px) {
+  .evergreen-nav {
+    position: static;
+    width: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: 0.75rem auto 0;
+    padding: 0 var(--gap);
+    gap: 0.4rem 1.25rem;
+  }
+}

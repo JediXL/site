@@ -1,0 +1,9 @@
+{{- $notes := where site.RegularPages "Params.evergreen" true }}
+{{- $notes = sort $notes "Params.evergreenOrder" "asc" }}
+{{- if $notes }}
+<nav class="evergreen-nav" aria-label="常青笔记">
+    {{- range $notes }}
+    <a href="{{ .RelPermalink }}"{{- if eq .RelPermalink $.RelPermalink }} class="active"{{- end }}>{{ .Title }}</a>
+    {{- end }}
+</nav>
+{{- end }}
