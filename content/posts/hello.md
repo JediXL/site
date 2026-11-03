@@ -3,7 +3,7 @@ title: 每一次重新搭建Blog，都好像是要重新做人
 date: 2026-11-02T09:00:00+08:00
 draft: false
 tags:
-  - 随笔
+  - 回旋的阶梯
 summary: 踏入荒原
 ---
 
