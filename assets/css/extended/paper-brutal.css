@@ -1,42 +1,57 @@
 :root {
-  --theme: #eae7de;
-  --entry: #eae7de;
-  --primary: #2b2a2f;
-  --secondary: #5d5b55;
+  --theme: #e4eef2;
+  --entry: #f7fbfc;
+  --primary: #243038;
+  --secondary: #5a6870;
   --tertiary: #f2e2be;
-  --content: #2b2a2f;
-  --code-bg: #dedacf;
-  --code-block-bg: #2d2a26;
-  --border: #cfcbc0;
+  --content: #2a3840;
+  --code-bg: #e7eef2;
+  --code-block-bg: #2c3840;
+  --border: #c5d0d6;
   --radius: 0;
-  --brutal-line: #1e1d22;
-  --brutal-shadow: #1e1d22;
+  --brutal-line: #2a3840;
+  --brutal-shadow: #243038;
   --brutal-yellow: #dfa832;
   --brutal-yellow-soft: #f2e2be;
+  --fog-glow: rgba(255, 255, 255, 0.72);
+  --fog-bank: rgba(186, 204, 214, 0.55);
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --theme: #22201d;
-  --entry: #22201d;
-  --primary: #e7e2d7;
-  --secondary: #aaa497;
-  --tertiary: #4e402b;
-  --content: #e7e2d7;
-  --code-bg: #191816;
-  --code-block-bg: #2d2a26;
-  --border: #36332e;
-  --brutal-line: #aaa392;
-  --brutal-shadow: #6e685d;
+  --theme: #5d6c74;
+  --entry: #6d7c84;
+  --primary: #f4f7f8;
+  --secondary: #d5dee3;
+  --tertiary: #5c5340;
+  --content: #f2f5f6;
+  --code-bg: #4e5c64;
+  --code-block-bg: #2c3840;
+  --border: #7d8d95;
+  --brutal-line: #e7eef2;
+  --brutal-shadow: #243038;
   --brutal-yellow: #f0be52;
-  --brutal-yellow-soft: #4e402b;
+  --brutal-yellow-soft: #6a5c3e;
+  --fog-glow: rgba(232, 240, 244, 0.22);
+  --fog-bank: rgba(196, 210, 218, 0.14);
   color-scheme: dark;
+}
+
+html {
+  background-color: var(--theme);
+  background-image:
+    radial-gradient(980px 620px at 12% -8%, var(--fog-glow), transparent 62%),
+    radial-gradient(820px 520px at 100% 0%, var(--fog-glow), transparent 58%),
+    radial-gradient(1100px 720px at 50% 115%, var(--fog-bank), transparent 64%);
+  background-attachment: fixed;
+  min-height: 100%;
 }
 
 body {
   font-family: "LXGW WenKai", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Segoe UI", sans-serif;
   line-height: 1.65;
   letter-spacing: 0.02em;
+  background: transparent;
 }
 
 code,
@@ -47,7 +62,7 @@ samp {
 }
 
 .list {
-  background: var(--code-bg);
+  background: transparent;
 }
 
 h1,
