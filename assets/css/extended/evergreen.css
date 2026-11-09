@@ -16,8 +16,12 @@
 }
 
 .evergreen-nav a.active {
-  color: var(--primary);
-  font-weight: 650;
+  color: var(--ember);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--ember);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
 }
 
 @media screen and (max-width: 1180px) {

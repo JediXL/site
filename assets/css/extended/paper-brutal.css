@@ -1,39 +1,37 @@
 :root {
-  --theme: #e4eef2;
+  --theme: #e6eef1;
   --entry: #f7fbfc;
   --primary: #243038;
-  --secondary: #5a6870;
-  --tertiary: #f2e2be;
+  --secondary: #5c6c74;
+  --tertiary: #d7e2e7;
   --content: #2a3840;
-  --code-bg: #e7eef2;
-  --code-block-bg: #2c3840;
-  --border: #c5d0d6;
+  --code-bg: #eef4f6;
+  --code-block-bg: #243038;
+  --border: #d3dee3;
   --radius: 0;
-  --brutal-line: #2a3840;
-  --brutal-shadow: #243038;
-  --brutal-yellow: #dfa832;
-  --brutal-yellow-soft: #f2e2be;
-  --fog-glow: rgba(255, 255, 255, 0.72);
-  --fog-bank: rgba(186, 204, 214, 0.55);
+  --rule: #c9d5db;
+  --ember: #b91010;
+  --ember-soft: rgba(185, 16, 16, 0.1);
+  --fog-glow: rgba(255, 255, 255, 0.78);
+  --fog-bank: rgba(176, 196, 206, 0.45);
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --theme: #5d6c74;
-  --entry: #6d7c84;
-  --primary: #f4f7f8;
-  --secondary: #d5dee3;
-  --tertiary: #5c5340;
-  --content: #f2f5f6;
-  --code-bg: #4e5c64;
-  --code-block-bg: #2c3840;
-  --border: #7d8d95;
-  --brutal-line: #e7eef2;
-  --brutal-shadow: #243038;
-  --brutal-yellow: #f0be52;
-  --brutal-yellow-soft: #6a5c3e;
-  --fog-glow: rgba(232, 240, 244, 0.22);
-  --fog-bank: rgba(196, 210, 218, 0.14);
+  --theme: #172126;
+  --entry: #243036;
+  --primary: #e8eef1;
+  --secondary: #b4c2c9;
+  --tertiary: #314047;
+  --content: #e4ecef;
+  --code-bg: #1d292e;
+  --code-block-bg: #121a1e;
+  --border: #3a4a52;
+  --rule: #3d4e56;
+  --ember: #ee6a5e;
+  --ember-soft: rgba(238, 106, 94, 0.16);
+  --fog-glow: rgba(210, 224, 230, 0.07);
+  --fog-bank: rgba(70, 104, 116, 0.28);
   color-scheme: dark;
 }
 
@@ -49,8 +47,8 @@ html {
 
 body {
   font-family: "LXGW WenKai", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Segoe UI", sans-serif;
-  line-height: 1.65;
-  letter-spacing: 0.02em;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
   background: transparent;
 }
 
@@ -75,31 +73,42 @@ h3,
   letter-spacing: 0;
 }
 
+.post-title,
+.page-header h1 {
+  font-size: 32px;
+  line-height: 1.35;
+}
+
+.entry-header h2 {
+  font-size: 22px;
+}
+
 .header {
-  border-bottom: 3px solid var(--brutal-line);
+  border-bottom: 1px solid var(--rule);
 }
 
 .footer {
-  border-top: 3px solid var(--brutal-line);
+  border-top: 1px solid var(--rule);
 }
 
 .menu .active {
-  background: var(--brutal-yellow);
-  color: #1e1d22;
+  background: transparent;
+  color: var(--ember);
   font-weight: 700;
-  text-decoration: none;
-  padding: 0.1rem 0.45rem;
+  text-decoration: underline;
+  text-decoration-color: var(--ember);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35rem;
+  padding: 0;
 }
 
 .post-entry,
 .searchResults li,
 .paginav,
-.post-tags a,
-.terms-tags a,
 .toc {
   border-radius: 0;
-  border: 2px solid var(--brutal-line);
-  box-shadow: 3px 3px 0 var(--brutal-shadow);
+  border: 1px solid var(--rule);
+  box-shadow: none;
   background: var(--entry);
 }
 
@@ -107,9 +116,9 @@ h3,
 .post-entry:focus-within,
 .searchResults li:hover,
 .searchResults li:focus-within {
-  transform: translate(-1px, -1px);
-  border-color: var(--brutal-line);
-  box-shadow: 4px 4px 0 var(--brutal-shadow);
+  transform: none;
+  border-color: color-mix(in srgb, var(--primary) 28%, var(--rule));
+  box-shadow: none;
 }
 
 .post-entry .entry-cover img,
@@ -123,39 +132,45 @@ h3,
 .entry-content a {
   color: var(--primary);
   text-decoration-line: underline;
-  text-decoration-color: var(--brutal-yellow);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-decoration-color: var(--ember);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
 }
 
 .md-content a:not(.anchor):hover,
 .post-content a:not(.anchor):hover,
 .entry-content a:hover {
-  color: var(--primary);
-  text-decoration-color: var(--primary);
+  color: var(--ember);
+  text-decoration-color: var(--ember);
 }
 
-.footer a,
-.evergreen-nav a {
-  text-decoration: none;
+.footer a {
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.22em;
+}
+
+.footer a:hover {
+  color: var(--ember);
+  text-decoration-color: var(--ember);
 }
 
 .evergreen-nav a.active {
-  color: var(--primary);
+  color: var(--ember);
   font-weight: 700;
   text-decoration: underline;
-  text-decoration-color: var(--brutal-yellow);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-decoration-color: var(--ember);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
 }
 
 .md-content blockquote {
-  border-inline-start: 3px solid var(--brutal-yellow);
+  border-inline-start: 2px solid var(--ember);
 }
 
 .md-content hr {
-  height: 3px;
-  background: var(--brutal-line);
+  height: 1px;
+  background: var(--rule);
 }
 
 .post-content code {
@@ -164,32 +179,42 @@ h3,
 }
 
 .md-content pre code {
-  border: 2px solid var(--brutal-line);
+  border: 1px solid var(--rule);
   border-radius: 0;
 }
 
 .post-tags a,
 .terms-tags a {
-  color: var(--primary);
+  border-radius: 0;
+  border: 1px solid var(--rule);
+  box-shadow: none;
+  background: transparent;
+  color: var(--secondary);
 }
 
 .post-tags a:hover,
 .terms-tags a:hover,
 .paginav a:hover {
-  background: var(--brutal-yellow-soft);
+  background: var(--ember-soft);
+  border-color: var(--ember);
+  color: var(--ember);
 }
 
 .pagination a,
 .top-link,
 .searchbox input {
   border-radius: 0;
-  border: 2px solid var(--brutal-line);
-  box-shadow: 2px 2px 0 var(--brutal-shadow);
+  border: 1px solid var(--rule);
+  box-shadow: none;
 }
 
 .pagination a {
-  background: var(--brutal-yellow);
-  color: #1e1d22;
+  background: transparent;
+  color: var(--primary);
+}
+
+.pagination a:hover {
+  color: var(--ember);
 }
 
 .top-link {
@@ -198,10 +223,10 @@ h3,
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--brutal-yellow) 32%, transparent);
+  background: var(--ember-soft);
 }
 
 mark {
-  background: color-mix(in srgb, var(--brutal-yellow) 28%, transparent);
+  background: var(--ember-soft);
   color: inherit;
 }

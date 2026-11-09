@@ -1,13 +1,25 @@
 .first-entry.home-info {
   min-height: 0;
-  margin: 0 0 var(--gap);
+  margin: 0.4rem 0 1.6rem;
+  padding: 0 0 1.15rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  box-shadow: none;
 }
 
 .home-info .entry-header h1 {
   font-size: 22px;
-  line-height: 1.4;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.home-info .entry-content,
+.home-info .entry-content p {
+  color: var(--secondary);
+  font-size: 16px;
 }
 
 .home-info .entry-content p {
-  margin-block: 0.4em;
+  margin-block: 0.35em;
 }
