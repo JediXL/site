@@ -1,0 +1,31 @@
+{{- $meta := slice }}
+
+{{- if not .Date.IsZero -}}
+    {{- $meta = $meta | append (printf "<span title='%s'>%s</span>" (.Date | time.Format "2006-01-02T15:04:05-07:00") (.Date | time.Format (default ":date_long" site.Params.DateFormat))) }}
+{{- end }}
+
+{{- /* Hugo splits on spaces, so a Chinese paragraph counts as one word. Count Han characters, and each Latin or number token as one word. */ -}}
+{{- $plain := .Plain -}}
+{{- $words := add (len (findRE `\p{Han}` $plain)) (len (findRE `[A-Za-z0-9]+(?:['’][A-Za-z0-9]+)?` $plain)) -}}
+{{- $minutes := div (add $words 399) 400 -}}
+{{- if lt $minutes 1 -}}
+    {{- $minutes = 1 -}}
+{{- end -}}
+
+{{- if (.Param "ShowReadingTime") -}}
+    {{- $meta = $meta | append (printf "<span>%s</span>" (i18n "read_time" $minutes | default (printf "%d min" $minutes))) }}
+{{- end }}
+
+{{- if (.Param "ShowWordCount") -}}
+    {{- $meta = $meta | append (printf "<span>%s</span>" (i18n "words" $words | default (printf "%d words" $words))) }}
+{{- end }}
+
+{{- if not (.Param "hideAuthor") -}}
+    {{- with (partial "author.html" .) }}
+        {{- $meta = $meta | append (printf "<span>%s</span>" .) }}
+    {{- end }}
+{{- end }}
+
+{{- with $meta }}
+    {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
+{{- end -}}
