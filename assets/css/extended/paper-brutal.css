@@ -14,6 +14,8 @@
   --ember-soft: rgba(185, 16, 16, 0.1);
   --fog-glow: rgba(255, 255, 255, 0.78);
   --fog-bank: rgba(176, 196, 206, 0.45);
+  --fog-deep: #c5d3da;
+  --fog-depth: 0;
   color-scheme: light;
 }
 
@@ -32,20 +34,38 @@
   --ember-soft: rgba(238, 106, 94, 0.16);
   --fog-glow: rgba(210, 224, 230, 0.07);
   --fog-bank: rgba(70, 104, 116, 0.28);
+  --fog-deep: #0c1418;
   color-scheme: dark;
+}
+
+@property --fog-depth {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
 }
 
 html {
   background-color: var(--theme);
-  background-image:
-    radial-gradient(980px 620px at 12% -8%, var(--fog-glow), transparent 62%),
-    radial-gradient(820px 520px at 100% 0%, var(--fog-glow), transparent 58%),
-    radial-gradient(1100px 720px at 50% 115%, var(--fog-bank), transparent 64%);
-  background-attachment: fixed;
+  background-color: color-mix(in srgb, var(--theme) calc((1 - var(--fog-depth)) * 100%), var(--fog-deep));
   min-height: 100%;
 }
 
+html::before {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  inset: -14%;
+  pointer-events: none;
+  background-image:
+    radial-gradient(980px 620px at 18% 6%, var(--fog-glow), transparent 62%),
+    radial-gradient(820px 520px at 86% 0%, var(--fog-glow), transparent 58%),
+    radial-gradient(1100px 720px at 48% 108%, var(--fog-bank), transparent 64%);
+  animation: fog-drift 56s ease-in-out infinite alternate;
+}
+
 body {
+  position: relative;
+  z-index: 1;
   font-family: "LXGW WenKai", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Segoe UI", sans-serif;
   line-height: 1.7;
   letter-spacing: 0.01em;
@@ -91,6 +111,10 @@ h3,
   border-top: 1px solid var(--rule);
 }
 
+.menu a:hover {
+  color: var(--ember);
+}
+
 .menu .active {
   background: transparent;
   color: var(--ember);
@@ -99,6 +123,7 @@ h3,
   text-decoration-color: var(--ember);
   text-decoration-thickness: 2px;
   text-underline-offset: 0.35rem;
+  text-shadow: 0 0 16px color-mix(in srgb, var(--ember) 55%, transparent);
   padding: 0;
 }
 
@@ -142,6 +167,8 @@ h3,
 .entry-content a:hover {
   color: var(--ember);
   text-decoration-color: var(--ember);
+  text-decoration-thickness: 2px;
+  text-shadow: 0 0 14px color-mix(in srgb, var(--ember) 50%, transparent);
 }
 
 .footer a {
@@ -162,10 +189,16 @@ h3,
   text-decoration-color: var(--ember);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 0.22em;
+  text-shadow: 0 0 14px color-mix(in srgb, var(--ember) 45%, transparent);
 }
 
 .md-content blockquote {
   border-inline-start: 2px solid var(--ember);
+  transition: box-shadow 0.45s ease;
+}
+
+.md-content blockquote:hover {
+  box-shadow: inset 3px 0 16px -8px var(--ember);
 }
 
 .md-content hr {
@@ -229,4 +262,74 @@ h3,
 mark {
   background: var(--ember-soft);
   color: inherit;
+}
+
+@keyframes fog-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-4%, 2.5%, 0) scale(1.08); }
+}
+
+@keyframes fog-walk {
+  to { --fog-depth: 1; }
+}
+
+@keyframes emerge {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  html {
+    animation: fog-walk auto linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+.home-info {
+  animation: emerge 1.25s ease both;
+}
+
+.home-info ~ .post-entry {
+  animation: emerge 0.95s ease both;
+}
+
+.home-info ~ .post-entry:nth-child(2) { animation-delay: 0.16s; }
+.home-info ~ .post-entry:nth-child(3) { animation-delay: 0.28s; }
+.home-info ~ .post-entry:nth-child(4) { animation-delay: 0.4s; }
+.home-info ~ .post-entry:nth-child(5) { animation-delay: 0.52s; }
+.home-info ~ .post-entry:nth-child(6) { animation-delay: 0.64s; }
+.home-info ~ .post-entry:nth-child(7) { animation-delay: 0.76s; }
+.home-info ~ .post-entry:nth-child(8) { animation-delay: 0.88s; }
+.home-info ~ .post-entry:nth-child(9) { animation-delay: 1s; }
+
+@media (max-width: 720px) {
+  html::before,
+  html {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before,
+  html,
+  .home-info,
+  .home-info ~ .post-entry,
+  .logo a img {
+    animation: none;
+  }
+
+  .home-info,
+  .home-info ~ .post-entry {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }

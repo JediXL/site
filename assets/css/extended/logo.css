@@ -1,3 +1,16 @@
 .logo a img {
   border-radius: 50%;
+  box-shadow: 0 0 14px 1px color-mix(in srgb, var(--ember) 48%, transparent);
+  animation: ember-breathe 7.5s ease-in-out infinite alternate;
+}
+
+@keyframes ember-breathe {
+  from { box-shadow: 0 0 10px 0 color-mix(in srgb, var(--ember) 32%, transparent); }
+  to { box-shadow: 0 0 22px 3px color-mix(in srgb, var(--ember) 68%, transparent); }
+}
+
+@media (max-width: 720px), (prefers-reduced-motion: reduce) {
+  .logo a img {
+    animation: none;
+  }
 }
