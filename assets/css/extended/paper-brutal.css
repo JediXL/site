@@ -34,9 +34,16 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Helvetica Neue", "Segoe UI", sans-serif;
+  font-family: "LXGW WenKai", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Segoe UI", sans-serif;
   line-height: 1.65;
   letter-spacing: 0.02em;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 .list {
@@ -49,8 +56,8 @@ h3,
 .entry-header h2,
 .post-title,
 .page-header h1 {
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .header {
