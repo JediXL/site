@@ -273,42 +273,12 @@ mark {
   to { --fog-depth: 1; }
 }
 
-@keyframes emerge {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-    filter: blur(7px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
-}
-
 @supports (animation-timeline: scroll()) {
   html {
     animation: fog-walk auto linear both;
     animation-timeline: scroll(root);
   }
 }
-
-.home-info {
-  animation: emerge 1.25s ease both;
-}
-
-.home-info ~ .post-entry {
-  animation: emerge 0.95s ease both;
-}
-
-.home-info ~ .post-entry:nth-child(2) { animation-delay: 0.16s; }
-.home-info ~ .post-entry:nth-child(3) { animation-delay: 0.28s; }
-.home-info ~ .post-entry:nth-child(4) { animation-delay: 0.4s; }
-.home-info ~ .post-entry:nth-child(5) { animation-delay: 0.52s; }
-.home-info ~ .post-entry:nth-child(6) { animation-delay: 0.64s; }
-.home-info ~ .post-entry:nth-child(7) { animation-delay: 0.76s; }
-.home-info ~ .post-entry:nth-child(8) { animation-delay: 0.88s; }
-.home-info ~ .post-entry:nth-child(9) { animation-delay: 1s; }
 
 @media (max-width: 720px) {
   html::before,
@@ -320,16 +290,7 @@ mark {
 @media (prefers-reduced-motion: reduce) {
   html::before,
   html,
-  .home-info,
-  .home-info ~ .post-entry,
   .logo a img {
     animation: none;
-  }
-
-  .home-info,
-  .home-info ~ .post-entry {
-    opacity: 1;
-    transform: none;
-    filter: none;
   }
 }
