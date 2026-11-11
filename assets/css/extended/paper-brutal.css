@@ -119,19 +119,36 @@ h3,
   border-top: var(--rule-major) solid var(--line);
 }
 
-.menu a:hover {
-  color: var(--ember);
+.menu {
+  align-items: center;
+  column-gap: 0.2rem;
+  line-height: 1.4;
 }
 
-.menu .active {
-  background: transparent;
-  color: var(--ember);
+.menu a {
+  color: var(--secondary);
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.menu a span {
+  display: inline-block;
+  padding: 0.32rem 0.85rem;
+  border: var(--rule-major) solid transparent;
+  border-radius: 0;
+}
+
+.menu a:hover {
+  color: var(--primary);
+}
+
+.menu .active,
+.menu a:hover .active {
+  background: var(--ember);
+  color: #1e1d22;
+  border-color: var(--line);
   font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--ember);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.35rem;
-  padding: 0;
+  text-decoration: none;
 }
 
 .post-entry,
