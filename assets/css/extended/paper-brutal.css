@@ -7,9 +7,14 @@
   --content: #2b2a2f;
   --code-bg: #e3e0d7;
   --code-block-bg: #2b2a2f;
-  --border: #dfa832;
+  --line: #1e1d22;
+  --shadow: #1e1d22;
+  --hairline: #cfcbc0;
+  --rule-major: 3px;
+  --rule-minor: 2px;
+  --border: var(--line);
   --radius: 0;
-  --rule: #dfa832;
+  --rule: var(--line);
   --ember: #dfa832;
   --ember-soft: rgba(223, 168, 50, 0.28);
   --fog-glow: rgba(234, 231, 222, 0.28);
@@ -28,8 +33,11 @@
   --content: #e7e2d7;
   --code-bg: #2d2a26;
   --code-block-bg: #191816;
-  --border: #f0be52;
-  --rule: #f0be52;
+  --line: #aaa392;
+  --shadow: #6e685d;
+  --hairline: #36332e;
+  --border: var(--line);
+  --rule: var(--line);
   --ember: #f0be52;
   --ember-soft: rgba(240, 190, 82, 0.3);
   --fog-glow: rgba(233, 228, 216, 0.05);
@@ -104,11 +112,11 @@ h3,
 }
 
 .header {
-  border-bottom: 1px solid var(--rule);
+  border-bottom: var(--rule-major) solid var(--line);
 }
 
 .footer {
-  border-top: 1px solid var(--rule);
+  border-top: var(--rule-major) solid var(--line);
 }
 
 .menu a:hover {
@@ -123,7 +131,6 @@ h3,
   text-decoration-color: var(--ember);
   text-decoration-thickness: 2px;
   text-underline-offset: 0.35rem;
-  text-shadow: 0 0 16px color-mix(in srgb, var(--ember) 55%, transparent);
   padding: 0;
 }
 
@@ -132,18 +139,19 @@ h3,
 .paginav,
 .toc {
   border-radius: 0;
-  border: 1px solid var(--rule);
-  box-shadow: none;
+  border: var(--rule-minor) solid var(--line);
+  box-shadow: var(--rule-minor) var(--rule-minor) 0 var(--shadow);
   background: var(--entry);
+  transition: transform 90ms ease, box-shadow 90ms ease;
 }
 
 .post-entry:hover,
 .post-entry:focus-within,
 .searchResults li:hover,
 .searchResults li:focus-within {
-  transform: none;
-  border-color: color-mix(in srgb, white 28%, var(--rule));
-  box-shadow: none;
+  transform: translate(-1px, -1px);
+  border-color: var(--line);
+  box-shadow: 3px 3px 0 var(--shadow);
 }
 
 .post-entry .entry-cover img,
@@ -158,23 +166,23 @@ h3,
   color: var(--primary);
   text-decoration-line: underline;
   text-decoration-color: var(--ember);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 0.22em;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 .md-content a:not(.anchor):hover,
 .post-content a:not(.anchor):hover,
 .entry-content a:hover {
-  color: var(--ember);
-  text-decoration-color: var(--ember);
+  color: var(--primary);
+  text-decoration-color: var(--primary);
   text-decoration-thickness: 2px;
-  text-shadow: 0 0 14px color-mix(in srgb, var(--ember) 50%, transparent);
 }
 
 .footer a {
   text-decoration: underline;
-  text-decoration-color: var(--rule);
-  text-underline-offset: 0.22em;
+  text-decoration-color: var(--ember);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 .footer a:hover {
@@ -187,23 +195,18 @@ h3,
   font-weight: 700;
   text-decoration: underline;
   text-decoration-color: var(--ember);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 0.22em;
-  text-shadow: 0 0 14px color-mix(in srgb, var(--ember) 45%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 .md-content blockquote {
-  border-inline-start: 2px solid var(--ember);
-  transition: box-shadow 0.45s ease;
-}
-
-.md-content blockquote:hover {
-  box-shadow: inset 3px 0 16px -8px var(--ember);
+  border-inline-start: var(--rule-major) solid var(--ember);
 }
 
 .md-content hr {
-  height: 1px;
-  background: var(--rule);
+  height: var(--rule-major);
+  border: 0;
+  background: var(--line);
 }
 
 .post-content code {
@@ -212,33 +215,37 @@ h3,
 }
 
 .md-content pre code {
-  border: 1px solid var(--rule);
+  border: var(--rule-minor) solid var(--line);
   border-radius: 0;
+  box-shadow: var(--rule-minor) var(--rule-minor) 0 var(--shadow);
 }
 
 .post-tags a,
 .terms-tags a {
   border-radius: 0;
-  border: 1px solid var(--rule);
-  box-shadow: none;
+  border: var(--rule-minor) solid var(--line);
+  box-shadow: var(--rule-minor) var(--rule-minor) 0 var(--shadow);
   background: transparent;
   color: var(--secondary);
+  transition: transform 90ms ease, box-shadow 90ms ease, background-color 90ms ease;
 }
 
 .post-tags a:hover,
 .terms-tags a:hover,
 .paginav a:hover {
   background: var(--ember-soft);
-  border-color: var(--ember);
-  color: var(--ember);
+  border-color: var(--line);
+  color: var(--primary);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--shadow);
 }
 
 .pagination a,
 .top-link,
 .searchbox input {
   border-radius: 0;
-  border: 1px solid var(--rule);
-  box-shadow: none;
+  border: var(--rule-minor) solid var(--line);
+  box-shadow: var(--rule-minor) var(--rule-minor) 0 var(--shadow);
 }
 
 .pagination a {

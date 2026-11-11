@@ -2,7 +2,8 @@
   word-break: normal;
 }
 
-.post-content table th,
-.post-content table td {
+.md-content table:not(.highlight table, .gist .highlight) th,
+.md-content table:not(.highlight table, .gist .highlight) td {
   vertical-align: top;
+  border-color: var(--hairline);
 }
