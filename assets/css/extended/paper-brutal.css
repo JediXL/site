@@ -7,9 +7,9 @@
   --content: #2b2a2f;
   --code-bg: #e3e0d7;
   --code-block-bg: #2b2a2f;
-  --border: #1e1d22;
+  --border: #dfa832;
   --radius: 0;
-  --rule: #1e1d22;
+  --rule: #dfa832;
   --ember: #dfa832;
   --ember-soft: rgba(223, 168, 50, 0.28);
   --fog-glow: rgba(234, 231, 222, 0.28);
@@ -28,8 +28,8 @@
   --content: #e7e2d7;
   --code-bg: #2d2a26;
   --code-block-bg: #191816;
-  --border: #aaa392;
-  --rule: #aaa392;
+  --border: #f0be52;
+  --rule: #f0be52;
   --ember: #f0be52;
   --ember-soft: rgba(240, 190, 82, 0.3);
   --fog-glow: rgba(233, 228, 216, 0.05);
@@ -142,7 +142,7 @@ h3,
 .searchResults li:hover,
 .searchResults li:focus-within {
   transform: none;
-  border-color: color-mix(in srgb, var(--primary) 28%, var(--rule));
+  border-color: color-mix(in srgb, white 28%, var(--rule));
   box-shadow: none;
 }
 
