@@ -10,8 +10,8 @@
   --border: #e3ddd2;
   --radius: 0;
   --rule: #ddd6cb;
-  --ember: #b91010;
-  --ember-soft: rgba(185, 16, 16, 0.1);
+  --ember: #b8892e;
+  --ember-soft: rgba(184, 137, 46, 0.16);
   --fog-glow: rgba(255, 244, 220, 0.42);
   --fog-bank: rgba(196, 176, 140, 0.2);
   --fog-deep: #e4ddd0;
@@ -30,8 +30,8 @@
   --code-block-bg: #141210;
   --border: #4a453e;
   --rule: #554f47;
-  --ember: #ee6a5e;
-  --ember-soft: rgba(238, 106, 94, 0.16);
+  --ember: #e4b75a;
+  --ember-soft: rgba(228, 183, 90, 0.2);
   --fog-glow: rgba(232, 210, 170, 0.08);
   --fog-bank: rgba(140, 116, 80, 0.14);
   --fog-deep: #1a1816;
