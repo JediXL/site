@@ -1,5 +1,5 @@
 :root {
-  --theme: #e3e0d7;
+  --theme: #f7f7f8;
   --entry: #eae7de;
   --primary: #2b2a2f;
   --secondary: #5d5b55;
@@ -17,9 +17,9 @@
   --rule: var(--line);
   --ember: #dfa832;
   --ember-soft: rgba(223, 168, 50, 0.28);
-  --fog-glow: rgba(234, 231, 222, 0.28);
-  --fog-bank: rgba(207, 203, 192, 0.22);
-  --fog-deep: #dedacf;
+  --fog-glow: rgba(255, 255, 255, 0.4);
+  --fog-bank: rgba(220, 220, 224, 0.22);
+  --fog-deep: #ececee;
   --fog-depth: 0;
   color-scheme: light;
 }
