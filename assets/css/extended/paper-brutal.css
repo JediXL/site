@@ -260,6 +260,11 @@ h3,
   box-shadow: var(--rule-minor) var(--rule-minor) 0 var(--shadow);
 }
 
+.post-header .post-tags {
+  margin-top: 0.85rem;
+  margin-bottom: 0.45rem;
+}
+
 .post-tags a,
 .terms-tags a {
   border-radius: 0;
