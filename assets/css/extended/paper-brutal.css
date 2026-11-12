@@ -157,10 +157,14 @@ h3,
   border-bottom: 0;
   border-radius: 0;
   line-height: 1.4;
+  transition: background-color 90ms ease, color 90ms ease, border-color 90ms ease;
 }
 
-.menu a:hover {
-  color: var(--primary);
+.menu a:hover span,
+.menu a:focus-visible span {
+  background: var(--ember);
+  color: #1e1d22;
+  border-color: var(--line);
 }
 
 .menu .active,
