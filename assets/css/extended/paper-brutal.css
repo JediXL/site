@@ -177,6 +177,61 @@ h3,
   text-decoration: none;
 }
 
+.nav-cluster {
+  display: flex;
+  align-items: flex-end;
+  column-gap: 0.75rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.nav-search {
+  align-self: center;
+  margin-bottom: 0.2rem;
+  flex: 0 0 auto;
+}
+
+.nav-search input {
+  width: 8.5rem;
+  height: 2rem;
+  padding: 0 0.7rem;
+  border: var(--rule-minor) solid var(--line);
+  border-radius: 0;
+  box-shadow: var(--rule-minor) var(--rule-minor) 0 var(--shadow);
+  background: var(--theme);
+  color: var(--primary);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.nav-search input::placeholder {
+  color: var(--secondary);
+  font-weight: 400;
+}
+
+.nav-search input:focus {
+  outline: none;
+  background: var(--entry);
+}
+
+@media screen and (max-width: 720px) {
+  .nav-cluster {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    row-gap: 0.45rem;
+  }
+
+  .nav-search {
+    flex: 1 1 7.5rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .nav-search input {
+    width: 100%;
+  }
+}
+
 .post-entry,
 .searchResults li,
 .paginav,

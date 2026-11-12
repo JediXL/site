@@ -51,15 +51,15 @@ params:
 
 menu:
   main:
+    - name: 首页
+      url: /
+      weight: 5
     - name: 文章
       url: /posts/
       weight: 10
     - name: 归档
       url: /archives/
       weight: 20
-    - name: 搜索
-      url: /search/
-      weight: 30
     - name: 关于
       url: /about/
       weight: 40
