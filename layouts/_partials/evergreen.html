@@ -3,7 +3,13 @@
 {{- if $notes }}
 <nav class="evergreen-nav" aria-label="常青笔记">
     {{- range $notes }}
-    <a href="{{ .RelPermalink }}"{{- if eq .RelPermalink $.RelPermalink }} class="active"{{- end }}>{{ .Title }}</a>
+    {{- $parts := split .Title " " }}
+    {{- $icon := index $parts 0 }}
+    {{- $label := delimit (after 1 $parts) " " }}
+    <a href="{{ .RelPermalink }}"{{- if eq .RelPermalink $.RelPermalink }} class="active"{{- end }}>
+        <span class="evergreen-icon" aria-hidden="true">{{ $icon }}</span>
+        <span class="evergreen-label">{{ $label | default .Title }}</span>
+    </a>
     {{- end }}
 </nav>
 {{- end }}

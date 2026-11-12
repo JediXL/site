@@ -230,12 +230,9 @@ h3,
 }
 
 .evergreen-nav a.active {
-  color: var(--ember);
+  color: var(--primary);
   font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--ember);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-decoration: none;
 }
 
 .md-content blockquote {

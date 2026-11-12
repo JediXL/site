@@ -1,27 +1,49 @@
 .evergreen-nav {
   position: fixed;
   z-index: 2;
-  top: calc(var(--header-height) + 2.5rem);
+  top: calc(var(--header-height) + 2.75rem);
   left: calc(50% - 34rem);
-  width: 9rem;
+  width: 4.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  align-items: center;
+  gap: 1.85rem;
 }
 
 .evergreen-nav a {
-  color: var(--secondary);
-  font-size: 15px;
-  line-height: 1.45;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  color: var(--primary);
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+}
+
+.evergreen-icon {
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  font-size: 1.2rem;
+  line-height: 1;
 }
 
 .evergreen-nav a.active {
-  color: var(--ember);
+  color: var(--primary);
   font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--ember);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 0.22em;
+  text-decoration: none;
+}
+
+.evergreen-nav a.active .evergreen-icon {
+  background: #fff;
+  border-width: 3px;
 }
 
 @media screen and (max-width: 1180px) {
@@ -29,10 +51,16 @@
     position: static;
     width: auto;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
     max-width: calc(var(--main-width) + var(--gap) * 2);
-    margin: 0.75rem auto 0;
+    margin: 1.1rem auto 0;
     padding: 0 var(--gap);
-    gap: 0.4rem 1.25rem;
+    gap: 1.35rem 2rem;
+  }
+
+  .evergreen-nav a {
+    width: auto;
+    min-width: 4rem;
   }
 }
