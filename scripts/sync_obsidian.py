@@ -49,9 +49,20 @@ PROPERTY = re.compile(r"^- [^:\n]+:.*$")
 SOURCE_URL = re.compile(r'(?m)^source:\s*"?(https?://[^"\s]+)"?\s*$')
 DATE_LINE = re.compile(r"(?m)^date:.*$")
 PRIVATE_TAG = re.compile(r"(?<!\S)#私密(?:/[^\s#/]+)*(?!\S)")
-LIST_PREFIX = re.compile(
-    r"^(\s*(?:[-*+]|\d+\.)\s+(?:\[[ xX]\]\s+)?)(\d{1,2}:\d{2}\s*[:：]?\s*)?"
+ENTRY_LEAD = r"\s*(?:[-*+]|\d+\.)[ \t]+(?:\[[ xX]\][ \t]+)?"
+ENTRY_TIME = re.compile(
+    rf"""^
+    (?P<lead>{ENTRY_LEAD})?
+    (?P<time>
+        \d{{1,2}}:\d{{2}}
+        (?:[ \t\u00a0\u202f]*[AaPp][Mm])?
+        [ \t\u00a0\u202f]*
+        [:：]?
+    )
+    """,
+    re.VERBOSE,
 )
+LIST_LEAD = re.compile(rf"^(?:{ENTRY_LEAD})")
 SKIP_DIRS = {".obsidian", ".git", ".trash", "node_modules"}
 
 
@@ -95,23 +106,35 @@ def block_bar(text: str) -> str:
     return "█" * max(count, 4)
 
 
+def kept_prefix(text: str) -> str:
+    timed = ENTRY_TIME.match(text)
+    if timed and timed.group("time"):
+        return timed.group(0)
+    listed = LIST_LEAD.match(text)
+    if listed:
+        return listed.group(0)
+    return re.match(r"\s*", text).group(0)
+
+
+def redact_text(text: str) -> str:
+    prefix = kept_prefix(text)
+    hidden = PRIVATE_TAG.sub("", text[len(prefix) :])
+    bar = block_bar(hidden)
+    if prefix.strip():
+        return prefix.rstrip() + " " + bar
+    return prefix + bar
+
+
 def redact_private_line(line: str) -> str:
     if line.strip().startswith("|"):
         cells = []
         for cell in line.split("|"):
             if PRIVATE_TAG.search(cell):
-                cells.append(" " + block_bar(PRIVATE_TAG.sub("", cell)) + " ")
+                cells.append(" " + redact_text(cell.strip()) + " ")
             else:
                 cells.append(cell)
         return "|".join(cells)
-
-    match = LIST_PREFIX.match(line)
-    prefix = match.group(0) if match else re.match(r"\s*", line).group(0)
-    hidden = PRIVATE_TAG.sub("", line[len(prefix) :])
-    bar = block_bar(hidden)
-    if prefix.strip():
-        return prefix.rstrip() + " " + bar
-    return prefix + bar
+    return redact_text(line)
 
 
 def redact_private(body: str) -> str:
