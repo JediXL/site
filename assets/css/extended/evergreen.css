@@ -41,7 +41,7 @@
 .evergreen-nav a:focus-visible .evergreen-icon {
   border-color: var(--ember);
   transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0 var(--shadow);
+  box-shadow: 3px 3px 0 var(--ember);
 }
 
 .evergreen-nav a.active {

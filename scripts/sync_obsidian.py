@@ -49,12 +49,13 @@ PROPERTY = re.compile(r"^- [^:\n]+:.*$")
 SOURCE_URL = re.compile(r'(?m)^source:\s*"?(https?://[^"\s]+)"?\s*$')
 DATE_LINE = re.compile(r"(?m)^date:.*$")
 PRIVATE_TAG = re.compile(r"(?<!\S)#私密(?:/[^\s#/]+)*(?!\S)")
-ENTRY_LEAD = r"\s*(?:[-*+]|\d+\.)[ \t]+(?:\[[ xX]\][ \t]+)?"
 ENTRY_TIME = re.compile(
-    rf"""^
-    (?P<lead>{ENTRY_LEAD})?
+    r"""^
+    [ \t]*
+    (?:(?P<bullet>[-*+]|\d+\.)[ \t]+)?
+    (?:(?P<check>\[[ xX]\])[ \t]+)?
     (?P<time>
-        \d{{1,2}}:\d{{2}}
+        \d{1,2}:\d{2}
         (?:[ \t\u00a0\u202f]*[AaPp][Mm])?
         [ \t\u00a0\u202f]*
         [:：]?
@@ -62,7 +63,9 @@ ENTRY_TIME = re.compile(
     """,
     re.VERBOSE,
 )
-LIST_LEAD = re.compile(rf"^(?:{ENTRY_LEAD})")
+LIST_LEAD = re.compile(
+    r"^[ \t]*(?:[-*+]|\d+\.)[ \t]+(?:\[[ xX]\][ \t]+)?"
+)
 SKIP_DIRS = {".obsidian", ".git", ".trash", "node_modules"}
 
 
@@ -106,23 +109,57 @@ def block_bar(text: str) -> str:
     return "█" * max(count, 4)
 
 
-def kept_prefix(text: str) -> str:
+def list_marker(match: re.Match[str] | None, text: str) -> str:
+    if match and match.group("bullet"):
+        marker = match.group("bullet")
+    else:
+        marker = "-"
+    check = match.group("check") if match else None
+    head = f"{marker} "
+    if check:
+        head += f"{check} "
+    return head
+
+
+def split_entry(text: str) -> tuple[str, str]:
     timed = ENTRY_TIME.match(text)
     if timed and timed.group("time"):
-        return timed.group(0)
+        prefix = list_marker(timed, text) + timed.group("time").rstrip()
+        return prefix, text[timed.end() :]
     listed = LIST_LEAD.match(text)
     if listed:
-        return listed.group(0)
-    return re.match(r"\s*", text).group(0)
+        return listed.group(0).rstrip(), text[listed.end() :]
+    indent = re.match(r"[ \t]+", text)
+    if indent and text[indent.end() :].strip():
+        return "-", text[indent.end() :]
+    return "", text.lstrip() if text[:1].isspace() else text
+
+
+def normalize_log_line(line: str) -> str:
+    if not line[:1].isspace() or line.lstrip(" \t").startswith("|"):
+        return line
+    body = line.lstrip(" \t")
+    if re.match(r"(?:[-*+]|\d+\.)[ \t]", body):
+        return line
+    if not body:
+        return line
+    prefix, rest = split_entry(line)
+    if not prefix:
+        return line
+    return prefix.rstrip() + (" " + rest.lstrip() if rest.strip() else "")
+
+
+def normalize_log_lines(body: str) -> str:
+    return "\n".join(normalize_log_line(line) for line in body.splitlines())
 
 
 def redact_text(text: str) -> str:
-    prefix = kept_prefix(text)
-    hidden = PRIVATE_TAG.sub("", text[len(prefix) :])
+    prefix, rest = split_entry(text)
+    hidden = PRIVATE_TAG.sub("", rest)
     bar = block_bar(hidden)
     if prefix.strip():
         return prefix.rstrip() + " " + bar
-    return prefix + bar
+    return bar
 
 
 def redact_private_line(line: str) -> str:
@@ -299,7 +336,7 @@ def sync_one(source: Path, target: Path, notes: dict[str, Path]) -> bool:
     front = split_front_matter(current)
     body = convert_body(source.read_text(encoding="utf-8"), notes)
     if "流水残心" in source.stem:
-        body = redact_private(body)
+        body = redact_private(normalize_log_lines(body))
     if current[len(front) :].strip() == body:
         print(f"unchanged {target.relative_to(ROOT)}")
         return False
