@@ -28,11 +28,20 @@
   place-items: center;
   width: 2.65rem;
   height: 2.65rem;
-  border: 2px solid var(--line);
+  border: var(--rule-minor) solid var(--line);
   border-radius: 50%;
   background: transparent;
+  box-shadow: var(--rule-minor) var(--rule-minor) 0 var(--shadow);
   font-size: 1.2rem;
   line-height: 1;
+  transition: transform 90ms ease, box-shadow 90ms ease, border-color 90ms ease;
+}
+
+.evergreen-nav a:hover .evergreen-icon,
+.evergreen-nav a:focus-visible .evergreen-icon {
+  border-color: var(--ember);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--shadow);
 }
 
 .evergreen-nav a.active {
